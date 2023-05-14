@@ -1,0 +1,1 @@
+curl -X POST -d@curl.ciphertext.base64OeapSha1.json http://127.0.1.15:8167/decrypt
