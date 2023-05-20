@@ -53,12 +53,12 @@ func handleRequest(reqBody []byte, privateKey *cryptkey.CryptKey) JsonResponse {
 		privKey, err = privateKey.GetPrivateKey()
 		if err != nil {
 			logger.Error().Err(err).Msg("Private Key Error")
-			return JsonResponse{Error: 1, Txt: err.Error()}
+			return JsonResponse{Error: 1, Errmsg: err.Error(), Txt: ""}
 		}
 		clearText, err := base64OeapSha1.Decrypt(jsonRequestData.Ctxt, privKey)
 		if err != nil {
 			logger.Error().Err(err).Msg("Decryption Error")
-			return JsonResponse{Error: 1, Txt: err.Error()}
+			return JsonResponse{Error: 1, Errmsg: err.Error(), Txt: ""}
 		}
 		return JsonResponse{Error: 0, Txt: clearText}
 	}

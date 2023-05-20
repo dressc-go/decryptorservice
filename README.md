@@ -26,4 +26,19 @@ The service is queried via JSON in a POST request:
 ```
 With "c" selecting the cipher (only base64OeapSha1 supported for now) and "ctxt" holding the ciphertext.
 
-The server answers with the cleartext in JSON
+The server answers with the cleartext in JSON:
+```
+{
+  "Txt":"Contrary to popular belief, Lorem Ipsum is not simply random text.\n",
+  "Error":0,
+  "Errmsg":""
+}
+```
+in case of decryption errors:
+```
+{
+  "Txt":"",
+  "Error":1,
+  "Errmsg":"decryption failed: crypto/rsa: decryption error"
+}
+```
