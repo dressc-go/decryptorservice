@@ -13,6 +13,7 @@ config.yml:
 IpAddress: 127.0.1.15          # IP Adress of the server
 Port: 8167                     # Port of the server
 DecPrivateKeyFile: privkey.pem # Decryption key
+DecPrivateKeyPassword: secret  # Password for decryption key (optional)
 TLSCertFile: pubcert.pem       # To activate TLS, CertFile and ...
 TLSKeyFile: privkey.pem        # key must be given
 ```
