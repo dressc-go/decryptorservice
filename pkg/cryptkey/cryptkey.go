@@ -36,7 +36,6 @@ func (ck *CryptKey) New(filePath string, password []byte) error {
 		password := []byte{0}
 		e = ck.parsePKCS8PrivateKey(password)
 	} else if ck.pemfile.decoded.Type == "ENCRYPTED PRIVATE KEY" {
-		password := []byte("secret")
 		e = ck.parsePKCS8PrivateKey(password)
 	} else if ck.pemfile.decoded.Type == "RSA PRIVATE KEY" {
 		e = ck.parsePKCS1PrivateKey()
