@@ -1,3 +1,4 @@
+#!/bin/bash
 find . -iname "*_test.go" | \
   while read tf ; do
     echo `dirname ${tf}`
