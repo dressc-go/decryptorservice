@@ -46,7 +46,7 @@ func TestConfig_New_Explicit(t *testing.T) {
 	if cnf.IpAddress != "127.0.1.15" {
 		t.Errorf("Failed: got wrong data")
 	}
-	if cnf.DecPrivateKeyFile != "privkey.pem" {
+	if cnf.DecPrivateKeyFile != "privkey.encrypted.pem" {
 		t.Errorf("Failed: got wrong data")
 	}
 }

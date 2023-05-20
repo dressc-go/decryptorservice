@@ -2,6 +2,7 @@
 IpAddress: 127.0.1.15
 Port: 8167
 EncPubKeyFile: pubkey.pem
-DecPrivateKeyFile: privkey.pem
+DecPrivateKeyFile: privkey.encrypted.pem
+DecPrivateKeyPassword: secret
 TLSCertFile: cert.pem
 TLSKeyFile: privkey.pem

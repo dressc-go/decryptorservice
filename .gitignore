@@ -21,4 +21,5 @@
 go.work
 
 build
+__debug*
 decryptorservice

@@ -19,7 +19,7 @@ func init() {
 
 func TestCryptKey_New_DoesNotExist(t *testing.T) {
 	pf := new(CryptKey)
-	err := pf.New("does_not_exist")
+	err := pf.New("does_not_exist", []byte{0})
 	if err == nil {
 		t.Errorf("Failed: FileNotFound expected")
 	}
@@ -28,12 +28,22 @@ func TestCryptKey_New_DoesNotExist(t *testing.T) {
 func TestCryptFile_New_Privkey(t *testing.T) {
 	testFilePath := path.Join(testdataPathCryptkey, "privkey.pem")
 	pf := new(CryptKey)
-	err := pf.New(testFilePath)
+	no_passw := []byte{0}
+	password := []byte("secret")
+	err := pf.NewPrivate(testFilePath, no_passw)
 	if err != nil {
 		t.Errorf("Failed: with" + err.Error())
 	}
+	testFilePath = path.Join(testdataPathCryptkey, "privkey.encrypted.pem")
+	if err := pf.NewPrivate(testFilePath, password); err != nil {
+		t.Errorf("Failed: with" + err.Error())
+	}
 	testFilePath = path.Join(testdataPathCryptkey, "privkey.pkcs1.pem")
-	if err := pf.New(testFilePath); err != nil {
+	if err := pf.NewPrivate(testFilePath, no_passw); err != nil {
+		t.Errorf("Failed: with" + err.Error())
+	}
+	testFilePath = path.Join(testdataPathCryptkey, "privkey.encrypted.pkcs1.pem")
+	if err := pf.NewPrivate(testFilePath, password); err != nil {
 		t.Errorf("Failed: with" + err.Error())
 	}
 	if _, err := pf.GetPrivateKey(); err != nil {
@@ -46,7 +56,7 @@ func TestCryptFile_New_Empty(t *testing.T) {
 	expectErrPrefix := "reading PEM failed"
 	gotError := ""
 	pf := new(CryptKey)
-	err := pf.New(testFilePath)
+	err := pf.New(testFilePath, []byte{0})
 	if err != nil {
 		gotError = err.Error()
 		if strings.HasPrefix(gotError, expectErrPrefix) {
@@ -61,7 +71,7 @@ func TestCryptFile_New_Damaged(t *testing.T) {
 	expectErrContains := "Can't parse PKIX from PEM"
 	gotError := ""
 	pf := new(CryptKey)
-	err := pf.New(testFilePath)
+	err := pf.NewPublic(testFilePath)
 	if err != nil {
 		gotError = err.Error()
 		if strings.Contains(gotError, expectErrContains) {
@@ -76,7 +86,7 @@ func TestCryptFile_New_Invalid(t *testing.T) {
 	expectErrContains := "Can't parse PKCS8 from PEM"
 	gotError := ""
 	pf := new(CryptKey)
-	err := pf.New(testFilePath)
+	err := pf.NewPrivate(testFilePath, []byte{0})
 	if err != nil {
 		gotError = err.Error()
 		if strings.Contains(gotError, expectErrContains) {
@@ -91,7 +101,7 @@ func TestCryptFile_New_Invalid_PKCS1(t *testing.T) {
 	expectErrContains := "Can't parse PKCS1 from PEM"
 	gotError := ""
 	pf := new(CryptKey)
-	err := pf.New(testFilePath)
+	err := pf.NewPrivate(testFilePath, []byte{0})
 	if err != nil {
 		gotError = err.Error()
 		if strings.Contains(gotError, expectErrContains) {
@@ -104,7 +114,7 @@ func TestCryptFile_New_Invalid_PKCS1(t *testing.T) {
 func TestCryptFile_New_Pubkey(t *testing.T) {
 	testFilePath := path.Join(testdataPathCryptkey, "pubkey.pem")
 	pf := new(CryptKey)
-	err := pf.New(testFilePath)
+	err := pf.NewPublic(testFilePath)
 	if err != nil {
 		t.Errorf("Failed: with" + err.Error())
 	}
@@ -112,7 +122,7 @@ func TestCryptFile_New_Pubkey(t *testing.T) {
 		t.Errorf("Got no Pubkey")
 	}
 	testFilePath = path.Join(testdataPathCryptkey, "pubkey.pkcs1.pem")
-	err = pf.New(testFilePath)
+	err = pf.NewPublic(testFilePath)
 	if err != nil {
 		t.Errorf("Failed: with" + err.Error())
 	}
@@ -129,7 +139,7 @@ func TestCryptFile_New_Invalid_Pubkey(t *testing.T) {
 	expectErrContains := "Can't parse PKIX from PEM"
 	gotError := ""
 	pf := new(CryptKey)
-	err := pf.New(testFilePath)
+	err := pf.NewPublic(testFilePath)
 	if err != nil {
 		gotError = err.Error()
 		if strings.Contains(gotError, expectErrContains) {
@@ -144,7 +154,7 @@ func TestCryptFile_New_Invalid_Pubkey_PKCS1(t *testing.T) {
 	expectErrContains := "Can't parse PKCS1 from PEM"
 	gotError := ""
 	pf := new(CryptKey)
-	err := pf.New(testFilePath)
+	err := pf.NewPublic(testFilePath)
 	if err != nil {
 		gotError = err.Error()
 		if strings.Contains(gotError, expectErrContains) {

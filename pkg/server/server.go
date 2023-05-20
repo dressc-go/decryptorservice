@@ -102,7 +102,11 @@ func Start(cnf *config.Config) {
 	logger.Info().Msg("Listening on " + listenOn)
 
 	decryptionKey := new(cryptkey.CryptKey)
-	err := decryptionKey.New(cnf.DecPrivateKeyFile)
+	password := []byte{0}
+	if cnf.DecPrivateKeyPassword != "" {
+		password = []byte(cnf.DecPrivateKeyPassword)
+	}
+	err := decryptionKey.New(cnf.DecPrivateKeyFile, password)
 	if err != nil {
 		logger.Fatal().Err(err).Msg("")
 	}

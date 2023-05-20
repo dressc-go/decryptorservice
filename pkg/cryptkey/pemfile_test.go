@@ -42,7 +42,7 @@ func TestPemFile_New_NoPem(t *testing.T) {
 	expectErrPrefix := "reading PEM failed: PEM Decoding failed."
 	gotError := ""
 	pf := new(CryptKey)
-	err := pf.New(testFilePath)
+	err := pf.NewPublic(testFilePath)
 	if err != nil {
 		gotError = err.Error()
 		if strings.HasPrefix(gotError, expectErrPrefix) {

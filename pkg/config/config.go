@@ -10,13 +10,14 @@ import (
 )
 
 type Config struct {
-	ConfigFile        string
-	IpAddress         string `yaml:"IpAddress"`
-	Port              uint16 `yaml:"Port"`
-	EncPubKeyFile     string `yaml:"EncPubKeyFile"`
-	DecPrivateKeyFile string `yaml:"DecPrivateKeyFile"`
-	TLSCertFile       string `yaml:"TLSCertFile"`
-	TLSKeyFile        string `yaml:"TLSKeyFile"`
+	ConfigFile            string
+	IpAddress             string `yaml:"IpAddress"`
+	Port                  uint16 `yaml:"Port"`
+	EncPubKeyFile         string `yaml:"EncPubKeyFile"`
+	DecPrivateKeyFile     string `yaml:"DecPrivateKeyFile"`
+	DecPrivateKeyPassword string `yaml:"DecPrivateKeyPassword"`
+	TLSCertFile           string `yaml:"TLSCertFile"`
+	TLSKeyFile            string `yaml:"TLSKeyFile"`
 }
 
 func (cnf *Config) New() error {
@@ -34,12 +35,24 @@ func (cnf *Config) New() error {
 		logger.Error().Err(e).Msg("")
 		return e
 	}
-	err = yaml.UnmarshalStrict(yamlFile, &cnf)
+	err = yaml.Unmarshal(yamlFile, &cnf)
 	if err != nil {
 		e := errors.Wrap(err, "Could not read config file:"+cnf.ConfigFile)
 		logger.Error().Err(e).Msg("")
 		return e
 	}
+	if cnf.IpAddress == "" {
+		cnf.IpAddress = "127.0.0.1"
+	}
+	if cnf.Port == 0 {
+		cnf.Port = 8080
+	}
+	if cnf.EncPubKeyFile == "" && cnf.DecPrivateKeyFile == "" {
+		err = errors.New("Either EncPubKeyFile or DecPrivateKeyFile must be configured")
+		logger.Error().Err(err).Msg("")
+		return err
+	}
+
 	return nil
 }
 
