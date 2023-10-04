@@ -1,11 +1,12 @@
-module decryptorservice
+module github.com/dressc-go/decryptorservice
 
 go 1.16
 
+replace github.com/dressc-go/decryptorservice/pkg/config => ./pkg/config
+
+replace github.com/dressc-go/decryptorservice/pkg/server => ./pkg/server
+
 require (
-	github.com/dressc-go/decryptors/base64OeapSha1 v0.0.0-20230514215302-511fca39e0a8
 	github.com/dressc-go/zlogger v0.0.0-20230514215442-66582730ec37
-	github.com/pkg/errors v0.9.1 // indirect
-	go.step.sm/crypto v0.30.0
-	gopkg.in/yaml.v2 v2.4.0
+	github.com/pkg/errors v0.9.1
 )

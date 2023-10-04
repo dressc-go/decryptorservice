@@ -1,9 +1,8 @@
 package main
 
 import (
-	"decryptorservice/pkg/config"
-	"decryptorservice/pkg/server"
-
+	"github.com/dressc-go/decryptorservice/pkg/config"
+	"github.com/dressc-go/decryptorservice/pkg/server"
 	"github.com/dressc-go/zlogger"
 	"github.com/pkg/errors"
 )
