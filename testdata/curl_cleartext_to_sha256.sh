@@ -1,0 +1,1 @@
+curl -X POST -d@curl.cleartext.base64OeapSha256.json --cacert cert.pem --insecure https://127.0.1.15:8167/encrypt
