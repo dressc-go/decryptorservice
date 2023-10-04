@@ -1,4 +1,4 @@
-module github.com/dressc-go/pkg/config
+module github.com/dressc-go/decryptorservice/pkg/config
 
 go 1.16
 

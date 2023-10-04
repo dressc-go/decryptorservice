@@ -1,4 +1,4 @@
-module github.com/dressc-go/pkg/cryptkey
+module github.com/dressc-go/decryptorservice/pkg/cryptkey
 
 go 1.16
 
