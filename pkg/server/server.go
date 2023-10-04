@@ -1,17 +1,16 @@
 package server
 
 import (
-	"crypto/rsa"
-	"decryptorservice/pkg/config"
-	"decryptorservice/pkg/cryptkey"
 	"encoding/json"
 	"fmt"
+	"github.com/dressc-go/decryptors/base64OeapSha1"
+	"github.com/dressc-go/decryptors/base64OeapSha256"
+	"github.com/dressc-go/decryptorservice/pkg/config"
+	"github.com/dressc-go/decryptorservice/pkg/cryptkey"
+	"github.com/dressc-go/zlogger"
 	"io/ioutil"
 	"net/http"
 	"strconv"
-
-	"github.com/dressc-go/decryptors/base64OeapSha1"
-	"github.com/dressc-go/zlogger"
 )
 
 type JsonRequestData struct {
@@ -20,58 +19,12 @@ type JsonRequestData struct {
 }
 
 type JsonResponse struct {
-	Txt    string
-	Error  int16
-	Errmsg string
-}
-
-func parsePayload(reqBody []byte) (JsonRequestData, error) {
-	var jsonRequestData JsonRequestData
-
-	logger := zlogger.GetLogger("server.parsePayload")
-	errJson := json.Unmarshal(reqBody, &jsonRequestData)
-	if errJson != nil {
-		logger.Error().
-			Err(errJson).
-			Msg("Error while parsing the payload")
-		return jsonRequestData, errJson
-	}
-	return jsonRequestData, nil
-}
-
-func handleRequest(reqBody []byte, privateKey *cryptkey.CryptKey) JsonResponse {
-	var jsonRequestData JsonRequestData
-	var err error
-
-	logger := zlogger.GetLogger("server.handleRequest")
-	jsonRequestData, err = parsePayload(reqBody)
-	if err != nil {
-		return JsonResponse{Error: 1, Errmsg: err.Error(), Txt: ""}
-	}
-	if jsonRequestData.C == "base64OeapSha1" {
-		var privKey *rsa.PrivateKey
-		privKey, err = privateKey.GetPrivateKey()
-		if err != nil {
-			logger.Error().Err(err).Msg("Private Key Error")
-			return JsonResponse{Error: 1, Errmsg: err.Error(), Txt: ""}
-		}
-		clearText, err := base64OeapSha1.Decrypt(jsonRequestData.Ctxt, privKey)
-		if err != nil {
-			logger.Error().Err(err).Msg("Decryption Error")
-			return JsonResponse{Error: 1, Errmsg: err.Error(), Txt: ""}
-		}
-		return JsonResponse{Error: 0, Txt: clearText}
-	}
-	logger.Error().Msg("Unknown crypto function requested in request")
-	return JsonResponse{Error: 1, Errmsg: "Unknown crypto function", Txt: ""}
+	Txt string
 }
 
 func decryptDataHandler(privateKey *cryptkey.CryptKey) func(http.ResponseWriter, *http.Request) {
 	realFun := func(w http.ResponseWriter, req *http.Request) {
-		var jsonResponse JsonResponse
-		var jsonString []byte
-		var err error
-		logger := zlogger.GetLogger("server.decryptDataHandler")
+		logger := zlogger.GetLogger("server.decryptBpk")
 		logger.Info().
 			Str("RemoteAddr", req.RemoteAddr).
 			Str("User-Agent", req.Header.Get("User-Agent")).
@@ -81,32 +34,49 @@ func decryptDataHandler(privateKey *cryptkey.CryptKey) func(http.ResponseWriter,
 			Str("data", string(reqBody)).
 			Msg("received_data")
 
-		jsonResponse = handleRequest(reqBody, privateKey)
-
-		jsonString, _ = json.Marshal(jsonResponse)
-		_, err = fmt.Fprint(w, string(jsonString))
-		if err != nil {
+		var jsonRequestData JsonRequestData
+		errJson := json.Unmarshal(reqBody, &jsonRequestData)
+		if errJson != nil {
 			logger.Error().
-				Err(err).
-				Msg("Error while handling the request")
-			w.WriteHeader(http.StatusBadRequest)
+				Err(errJson).
+				Msg("Error while parsing the payload")
 			return
 		}
+		resp := JsonResponse{Txt: ""}
+		if jsonRequestData.C == "base64OeapSha1" {
+			privKey, _ := privateKey.GetPrivateKey()
+			clearText, _ := base64OeapSha1.Decrypt(jsonRequestData.Ctxt, privKey)
+			resp = JsonResponse{Txt: clearText}
+		}
+		if jsonRequestData.C == "base64OeapSha256" {
+			privKey, _ := privateKey.GetPrivateKey()
+			clearText, _ := base64OeapSha256.Decrypt(jsonRequestData.Ctxt, privKey)
+			resp = JsonResponse{Txt: clearText}
+		}
+		str_resp, _ := json.Marshal(resp)
+		if len(resp.Txt) > 0 {
+			_, err := fmt.Fprintf(w, string(str_resp))
+			if err != nil {
+				logger.Error().
+					Err(err).
+					Msg("Error while handling the request")
+				return
+			}
+		} else {
+			w.WriteHeader(http.StatusBadRequest)
+		}
+		return
 	}
 	return realFun
 }
 
 func Start(cnf *config.Config) {
 	listenOn := cnf.IpAddress + ":" + strconv.Itoa(int(cnf.Port))
-	logger := zlogger.GetLogger("server.Start")
+	logger := zlogger.GetLogger("server")
 	logger.Info().Msg("Listening on " + listenOn)
 
 	decryptionKey := new(cryptkey.CryptKey)
-	password := []byte{0}
-	if cnf.DecPrivateKeyPassword != "" {
-		password = []byte(cnf.DecPrivateKeyPassword)
-	}
-	err := decryptionKey.New(cnf.DecPrivateKeyFile, password)
+	err := decryptionKey.New(cnf.DecPrivateKeyFile)
 	if err != nil {
 		logger.Fatal().Err(err).Msg("")
 	}
