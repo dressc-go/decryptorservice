@@ -12,7 +12,7 @@
             "request": "launch",
             "mode": "auto",
             "program": "${fileDirname}",
-            "cwd": "testdata",
+            "cwd": "testdata"
         }
     ]
 }

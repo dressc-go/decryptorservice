@@ -2,9 +2,9 @@ module github.com/dressc-go/decryptorservice/pkg/server
 
 go 1.16
 
-replace github.com/dressc-go/decryptorservice/pkg/config => ../../pkg/config
+replace github.com/dressc-go/decryptorservice/pkg/config => ../config
 
-replace github.com/dressc-go/decryptorservice/pkg/cryptkey => ../../pkg/cryptkey
+replace github.com/dressc-go/decryptorservice/pkg/cryptkey => ../cryptkey
 
 replace github.com/dressc-go/decryptors/base64OeapSha256 => github.com/dressc-go/decryptors/base64OeapSha256 v0.0.0-20231004111351-e4120e1a4872
 

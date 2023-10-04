@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 TG=decryptorservice_x86_64
 mkdir -p build/${TG}
 go build -o build/${TG}/decryptorservice decryptorservice.go 
