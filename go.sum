@@ -1,6 +1,16 @@
 github.com/coreos/go-systemd/v22 v22.3.3-0.20220203105225-a9a7ef127534/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSVTIJ3seZv2GcEnc=
+github.com/dressc-go/decryptors/base64OeapSha1 v0.0.0-20231004111351-e4120e1a4872 h1:u+dTUAh9ahNk9JYso7w8h/oNQlrd+8ab6AIVYoExSMg=
+github.com/dressc-go/decryptors/base64OeapSha1 v0.0.0-20231004111351-e4120e1a4872/go.mod h1:Z5DKqIEPALFv+2ducEF6IYmb3SATzv6jAoeUiO4dgXk=
+github.com/dressc-go/decryptors/base64OeapSha256 v0.0.0-20231004111351-e4120e1a4872 h1:njl5xzG/642PIfmvoOq6DgZqThsuwUYf4OtWL0MDeZQ=
+github.com/dressc-go/decryptors/base64OeapSha256 v0.0.0-20231004111351-e4120e1a4872/go.mod h1:PEbkuYCn38Xjzl2Bb8uFRdZYaxc5UjhEBgfvU6bzpMk=
+github.com/dressc-go/decryptors/common v0.0.0-20231004111351-e4120e1a4872 h1:Or8sXuaXK2RnmIepa/Gydv74Y0+PnpHKLRg0CWiDoWI=
+github.com/dressc-go/decryptors/common v0.0.0-20231004111351-e4120e1a4872/go.mod h1:yXex3Q7hYeFLyok6df37LpYU40n62ZW75qompkJA3XM=
 github.com/dressc-go/decryptorservice/pkg/config v0.0.0-20231004123244-ad8d1dfc077b h1:xnXo30ST2G2FELEOe4L4P1NmhhRT0Uos+mzxFwiSLWI=
 github.com/dressc-go/decryptorservice/pkg/config v0.0.0-20231004123244-ad8d1dfc077b/go.mod h1:WLvlDaT4gjUE1zSHWYJIzoJ8F+BPZgdECMuaTAgV3lc=
+github.com/dressc-go/decryptorservice/pkg/cryptkey v0.0.0-20231004124920-edb0a8e10faf h1:dFb0qV0ZQTV+dfTGdyGWSoB4Z2cUI729SaIjmyAH6P8=
+github.com/dressc-go/decryptorservice/pkg/cryptkey v0.0.0-20231004124920-edb0a8e10faf/go.mod h1:1F7I3KfDtLVj+nlQVXUQKsPAzj89BUD0V1JPFqANF0k=
+github.com/dressc-go/decryptorservice/pkg/server v0.0.0-20231004123244-ad8d1dfc077b h1:tuf5QLp7HF0P3G4vi5UbKXZq4xdeWFiasMkbmnQWS6U=
+github.com/dressc-go/decryptorservice/pkg/server v0.0.0-20231004123244-ad8d1dfc077b/go.mod h1:Y/vEXzYQoIY5MMzbYAvcZ0oKkAeOOjcwzPA90aSfis0=
 github.com/dressc-go/zlogger v0.0.0-20230514215442-66582730ec37 h1:3qrvzsvPJlxtyAeVf/s/6L9nYQz4GTPjw3yU4xPIooA=
 github.com/dressc-go/zlogger v0.0.0-20230514215442-66582730ec37/go.mod h1:HA5NO192m0yqwDfW8RBCsIiQgcFLp78LVdwddRYQi8Q=
 github.com/godbus/dbus/v5 v5.0.4/go.mod h1:xhWf0FNVPg57R7Z0UbKHbJfkEywrmjJnf7w5xrFpKfA=
@@ -16,6 +26,7 @@ github.com/rs/zerolog v1.29.0/go.mod h1:NILgTygv/Uej1ra5XxGf82ZFSLk58MFGAUS2o6us
 golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.0.0-20210927094055-39ccf1dd6fa6 h1:foEbQz/B0Oz6YIqu/69kfXPYeFQAuuMYFkjaqXzl5Wo=
 golang.org/x/sys v0.0.0-20210927094055-39ccf1dd6fa6/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v2 v2.4.0 h1:D8xgwECY7CYvx+Y2n4sBz93Jn9JRvxdiyyo8CTfuKaY=
 gopkg.in/yaml.v2 v2.4.0/go.mod h1:RDklbk79AGWmwhnvt/jBztapEOGDOx6ZbXqjP6csGnQ=

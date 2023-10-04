@@ -1,11 +1,14 @@
 github.com/coreos/go-systemd/v22 v22.3.3-0.20220203105225-a9a7ef127534/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSVTIJ3seZv2GcEnc=
-github.com/dressc-go/decryptors/base64OeapSha1 v0.0.0-20230514215302-511fca39e0a8 h1:MvUgmv8xxG8WS5jxX3BJT5/9rB/zfIOzq3XxyDuL0m4=
-github.com/dressc-go/decryptors/base64OeapSha1 v0.0.0-20230514215302-511fca39e0a8/go.mod h1:0fpUlvTVF9SLG32wTVMfCzr2AXBq9s4aGb95iPcmXbw=
+github.com/dressc-go/decryptors/base64OeapSha1 v0.0.0-20231004111351-e4120e1a4872 h1:u+dTUAh9ahNk9JYso7w8h/oNQlrd+8ab6AIVYoExSMg=
+github.com/dressc-go/decryptors/base64OeapSha1 v0.0.0-20231004111351-e4120e1a4872/go.mod h1:Z5DKqIEPALFv+2ducEF6IYmb3SATzv6jAoeUiO4dgXk=
 github.com/dressc-go/decryptors/base64OeapSha256 v0.0.0-20231004111351-e4120e1a4872 h1:njl5xzG/642PIfmvoOq6DgZqThsuwUYf4OtWL0MDeZQ=
 github.com/dressc-go/decryptors/base64OeapSha256 v0.0.0-20231004111351-e4120e1a4872/go.mod h1:PEbkuYCn38Xjzl2Bb8uFRdZYaxc5UjhEBgfvU6bzpMk=
 github.com/dressc-go/decryptors/common v0.0.0-20231004111351-e4120e1a4872 h1:Or8sXuaXK2RnmIepa/Gydv74Y0+PnpHKLRg0CWiDoWI=
 github.com/dressc-go/decryptors/common v0.0.0-20231004111351-e4120e1a4872/go.mod h1:yXex3Q7hYeFLyok6df37LpYU40n62ZW75qompkJA3XM=
-github.com/dressc-go/zlogger v0.0.0-20230514213412-5c5ff0920b8b/go.mod h1:HA5NO192m0yqwDfW8RBCsIiQgcFLp78LVdwddRYQi8Q=
+github.com/dressc-go/decryptorservice/pkg/config v0.0.0-20231004124920-edb0a8e10faf h1:tscPOFyFWPBUPnot5kza7WIZYqYDtAbOl6OGQ/BjzEA=
+github.com/dressc-go/decryptorservice/pkg/config v0.0.0-20231004124920-edb0a8e10faf/go.mod h1:WLvlDaT4gjUE1zSHWYJIzoJ8F+BPZgdECMuaTAgV3lc=
+github.com/dressc-go/decryptorservice/pkg/cryptkey v0.0.0-20231004124920-edb0a8e10faf h1:dFb0qV0ZQTV+dfTGdyGWSoB4Z2cUI729SaIjmyAH6P8=
+github.com/dressc-go/decryptorservice/pkg/cryptkey v0.0.0-20231004124920-edb0a8e10faf/go.mod h1:1F7I3KfDtLVj+nlQVXUQKsPAzj89BUD0V1JPFqANF0k=
 github.com/dressc-go/zlogger v0.0.0-20230514215442-66582730ec37 h1:3qrvzsvPJlxtyAeVf/s/6L9nYQz4GTPjw3yU4xPIooA=
 github.com/dressc-go/zlogger v0.0.0-20230514215442-66582730ec37/go.mod h1:HA5NO192m0yqwDfW8RBCsIiQgcFLp78LVdwddRYQi8Q=
 github.com/godbus/dbus/v5 v5.0.4/go.mod h1:xhWf0FNVPg57R7Z0UbKHbJfkEywrmjJnf7w5xrFpKfA=
