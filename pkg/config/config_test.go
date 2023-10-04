@@ -1,13 +1,12 @@
 package config
 
 import (
+	"github.com/dressc-go/zlogger"
 	"os"
 	"path"
 	"runtime"
 	"strings"
 	"testing"
-
-	"github.com/dressc-go/zlogger"
 )
 
 var testdataPath string
