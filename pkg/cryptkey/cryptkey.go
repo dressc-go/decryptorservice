@@ -83,3 +83,10 @@ func (ck *CryptKey) GetPrivateKey() (*rsa.PrivateKey, error) {
 	}
 	return nil, errors.New("Not a private key")
 }
+
+func (ck *CryptKey) GetPublicKey() (*rsa.PublicKey, error) {
+	if ck.pubkey != nil {
+		return ck.pubkey, nil
+	}
+	return nil, errors.New("Not a public key")
+}
