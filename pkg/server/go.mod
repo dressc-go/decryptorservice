@@ -4,7 +4,7 @@ go 1.16
 
 replace github.com/dressc-go/decryptorservice/pkg/config => github.com/dressc-go/decryptorservice/pkg/config v0.0.0-20231004124920-edb0a8e10faf
 
-replace github.com/dressc-go/decryptorservice/pkg/cryptkey => github.com/dressc-go/decryptorservice/pkg/cryptkey v0.0.0-20231004124920-edb0a8e10faf
+replace github.com/dressc-go/decryptorservice/pkg/cryptkey => github.com/dressc-go/decryptorservice/pkg/cryptkey v0.0.0-20231004150659-5a85bcb35664
 
 replace github.com/dressc-go/decryptors/base64OeapSha256 => github.com/dressc-go/decryptors/base64OeapSha256 v0.0.0-20231004111351-e4120e1a4872
 
