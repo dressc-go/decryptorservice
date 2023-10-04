@@ -1,12 +1,11 @@
 package cryptkey
 
 import (
+	"github.com/dressc-go/zlogger"
 	"path"
 	"runtime"
 	"strings"
 	"testing"
-
-	"github.com/dressc-go/zlogger"
 )
 
 var testdataPath_pemfile string
@@ -42,7 +41,7 @@ func TestPemFile_New_NoPem(t *testing.T) {
 	expectErrPrefix := "reading PEM failed: PEM Decoding failed."
 	gotError := ""
 	pf := new(CryptKey)
-	err := pf.NewPublic(testFilePath)
+	err := pf.New(testFilePath)
 	if err != nil {
 		gotError = err.Error()
 		if strings.HasPrefix(gotError, expectErrPrefix) {
